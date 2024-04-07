@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <style>
+            h1{
+                text-align: center;
+                color: red;
+            }
+            body{
+                background-color: rgb(60,60,50);
+            }
+            form{
+                padding-left: 440px;
+            }
+            .content label{
+                padding-left: 140px;
+                font-size: 25px;
+                color:white;
+            }
+            .content select{
+                width: 465px;
+                height: 35px;
+                border: 2px solid red;
+                border-radius: 5px;
+            }
+            .btn button{
+                width: 175px;
+                height: 35px;
+                color: white;
+                background-color: red;
+                border: 2px solid black;
+                border-radius: 5px;
+            }
+            .pred{
+                padding-left: 440px;
+
+            }
+            .pred h2{
+                color: red;
+            }
+            .pred ul li{
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>MOVIE RECOMMENDATION SYSTEM</h1>
+        <form action = '/recommend' method = 'POST'>
+            <div class="content">           
+                <label for="movie">Select the movie...</label><br>
+                <select name="movie" id="movie">
+                    {% for name in movie_names %}
+                        <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div><br>
+            <div class="btn">
+                <button type= submit>Show recommendations...</button>
+            </div>
+        </form>
+        {% if recommendations %}
+            <div class = 'pred'>
+            <h2>Recommended movies for {{org_title}};</h2>
+            <ul>
+                {% for recommendation in recommendations %}
+                    <li>{{ recommendation }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        {% endif %}
+    </body>
+</html>
